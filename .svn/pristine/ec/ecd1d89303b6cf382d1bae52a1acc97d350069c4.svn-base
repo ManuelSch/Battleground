@@ -1,0 +1,30 @@
+package ims.tuwien.ac.at.battleground.util;
+
+/**
+ * This class is used to convert pixels to units and otherwise
+ * @author Hoch
+ */
+public class DimensionUtil {
+
+    public static int DIMENSION_X_PIXEL;
+    public static int DIMENSION_Y_PIXEL;
+
+    public static float CONVERSION_RATE = 0.05f;
+
+    public static int convertPixelToUnit(int pixel) {
+        return (int)(pixel / CONVERSION_RATE);
+    }
+
+    public static int convertUnitToPixel(int unit) {
+        return (int)(unit * CONVERSION_RATE);
+    }
+
+    public static float SCALE_X(float x) {
+        return DIMENSION_X_PIXEL * x;
+    }
+
+    public static float SCALE_Y(float y) {
+        return DIMENSION_Y_PIXEL * y;
+    }
+
+}

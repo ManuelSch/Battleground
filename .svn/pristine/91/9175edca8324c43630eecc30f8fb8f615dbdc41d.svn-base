@@ -1,0 +1,21 @@
+package ims.tuwien.ac.at.battleground.game.entity.enemy;
+
+/**
+ * Created by hoch on 05.11.2015.
+ */
+public class Sneaky extends Strategy {
+    @Override
+    public void pathfinding() {
+
+    }
+
+    @Override
+    public void attack() {
+
+    }
+
+    @Override
+    public void evade() {
+
+    }
+}

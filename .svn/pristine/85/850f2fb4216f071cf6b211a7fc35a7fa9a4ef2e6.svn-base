@@ -1,0 +1,11 @@
+package ims.tuwien.ac.at.battleground.game.util;
+
+/**
+ * Created by hoch on 10.12.2015.
+ */
+public enum EnemyType {
+    BUGGY,
+    HELICOPTER,
+    TANK,
+    ROBOT
+}

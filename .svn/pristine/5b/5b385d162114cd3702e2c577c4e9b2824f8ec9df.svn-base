@@ -1,0 +1,21 @@
+package ims.tuwien.ac.at.battleground.game.entity.bullet;
+
+import android.content.Context;
+
+import ims.tuwien.ac.at.battleground.R;
+import ims.tuwien.ac.at.battleground.util.DimensionUtil;
+
+/**
+ * Created by Manuel on 11.11.2015.
+ */
+public class Laser extends Bullet
+{
+    public Laser(float x, float y, float xDest, float yDest, boolean shootsEnemies)
+    {
+        super(x, y, R.drawable.laser, xDest, yDest, shootsEnemies);
+        this.speedTotal = (int) DimensionUtil.SCALE_X(0.2f)*10;
+        this.damage = 10;
+        this.shootsFlying = false;
+        SOUND_MANAGER.playSound(R.raw.laser1_1, (float) (Math.random() * 0.5 + 0.75));
+    }
+}

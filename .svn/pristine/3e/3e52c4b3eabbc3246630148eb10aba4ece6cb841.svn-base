@@ -1,0 +1,33 @@
+package ims.tuwien.ac.at.battleground.game.entity.enemy;
+
+import android.content.Context;
+
+import ims.tuwien.ac.at.battleground.R;
+
+/**
+ * Created by Manuel on 11.11.2015.
+ */
+public class Buggy extends Enemy
+{
+    public Buggy(float x, float y)
+    {
+        super(x, y, R.drawable.buggy_body);
+        this.enemyGun = new BuggyGun(getX(), getY(), this);
+
+        setHitPointsMax(300);
+        setHitPoints(getHitPointsMax());
+
+        setSpeed(120);
+        setMoneyValue(40);
+        setScoreValue(10);
+        setFlying(false);
+    }
+
+    public void update(float tpf)
+    {
+        this.moveTowards((int) (this.getSpeed() * tpf), 0);
+        this.updateAnimation(true);
+
+        super.update(tpf);
+    }
+}

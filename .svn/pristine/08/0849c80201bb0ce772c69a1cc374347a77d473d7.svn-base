@@ -1,0 +1,21 @@
+package ims.tuwien.ac.at.battleground.game.entity.building;
+
+import android.content.Context;
+
+import ims.tuwien.ac.at.battleground.R;
+
+/**
+ * Created by Manuel on 11.11.2015.
+ */
+public class Wall extends Building
+{
+    public Wall(float x, float y)
+    {
+        super(x, y, R.drawable.wall);
+
+        setHitPointsMax(1000);
+        setHitPoints(getHitPointsMax());
+
+        setCosts(120);
+    }
+}

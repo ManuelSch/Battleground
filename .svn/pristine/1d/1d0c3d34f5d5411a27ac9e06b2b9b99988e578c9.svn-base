@@ -1,0 +1,85 @@
+package ims.tuwien.ac.at.battleground.game.entity;
+
+import ims.tuwien.ac.at.battleground.game.entity.building.Building;
+import ims.tuwien.ac.at.battleground.game.entity.building.FlakTower;
+import ims.tuwien.ac.at.battleground.game.entity.building.RocketTower;
+import ims.tuwien.ac.at.battleground.game.entity.building.Turret;
+import ims.tuwien.ac.at.battleground.game.entity.building.Wall;
+import ims.tuwien.ac.at.battleground.game.entity.enemy.Buggy;
+import ims.tuwien.ac.at.battleground.game.entity.enemy.Enemy;
+import ims.tuwien.ac.at.battleground.game.entity.enemy.Helicopter;
+import ims.tuwien.ac.at.battleground.game.entity.enemy.Robot;
+import ims.tuwien.ac.at.battleground.game.entity.enemy.Tank;
+import ims.tuwien.ac.at.battleground.game.util.BuildingType;
+import ims.tuwien.ac.at.battleground.game.util.Constants;
+import ims.tuwien.ac.at.battleground.game.util.EnemyType;
+
+/**
+ * @author hoch
+ */
+public class GameObjectFactory {
+
+    public static Building getBuilding(BuildingType buildingType, float x, float y) {
+        switch(buildingType) {
+            case FLAK_TOWER:
+                return new FlakTower(x, y);
+            case ROCKET_TOWER:
+                return new RocketTower(x, y);
+            case TURRET:
+                return new Turret(x, y);
+            case WALL:
+                return new Wall(x, y);
+            default:
+                return null;// TODO: Exception Handling
+        }
+    }
+
+    public static double getPrice(BuildingType buildingType) {
+        switch(buildingType) {
+            case FLAK_TOWER:
+                return Constants.FLAK_TOWER_PRICE;
+            case ROCKET_TOWER:
+                return Constants.ROCKET_TOWER_PRICE;
+            case TURRET:
+                return Constants.TURRET_PRICE;
+            case WALL:
+                return Constants.WALL_PRICE;
+            default:
+                return 0;
+        }
+    }
+
+    public static Enemy getEnemy(EnemyType enemyType, float x, float y) {
+        switch(enemyType) {
+            case BUGGY:
+                return new Buggy(x, y);
+            case TANK:
+                return new Tank(x, y);
+            case HELICOPTER:
+                return new Helicopter(x, y);
+            case ROBOT:
+                return new Robot(x, y);
+            default:
+                return null;// TODO: Exception Handling
+        }
+    }
+
+    public static EnemyType getRandomEnemy() {
+        double rand = Math.random();
+
+        //return EnemyType.BUGGY;
+
+        if(rand <= 0.3) {
+            return EnemyType.BUGGY;
+        }
+        else if(rand <= 0.5) {
+            return EnemyType.HELICOPTER;
+        }
+        else if(rand <= 0.85) {
+                return EnemyType.ROBOT;
+        }
+        else {
+                return EnemyType.TANK;
+        }
+    }
+}

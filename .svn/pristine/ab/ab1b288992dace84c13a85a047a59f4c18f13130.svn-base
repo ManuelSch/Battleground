@@ -1,0 +1,35 @@
+<resources>
+    <string name="app_name">Battleground</string>
+
+    <string name="title_activity_video">VideoActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="title_activity_menu">Menu</string>
+
+    <string name="title_activity_game">GameActivity</string>
+
+    <string name="btn_skip_intro">Skip Intro</string>
+    <string name="txt_splash_screen">This is a Splash Screen</string>
+    <string name="btn_start_game">Start Game</string>
+    <string name="btn_pause_game">Pause Game</string>
+    <string name="btn_play_video">Play Video</string>
+    <string name="btn_exit_app">Exit App</string>
+    <string name="btn_highscore">Highscore</string>
+    <string name="txt_user">User</string>
+    <string name="txt_score">Score</string>
+    <string name="txt_delete">Delete</string>
+
+    <string name="action_settings">Settings</string>
+
+    <string name="txt_start_level">Start Level</string>
+    <string name="txt_pause_game">Pause Game</string>
+    <string name="txt_resume_game">Resume Game</string>
+    <string name="txt_start_game">Start Game</string>
+
+    <string name="txt_player_name_hint">Player name</string>
+    <string name="txt_player_setup_dialog">Player Setup</string>
+    <string name="txt_player_round_lost">Round Lost</string>
+    <string name="txt_player_round_won">Round Won</string>
+
+    <string name="txt_cancel">Cancel</string>
+</resources>

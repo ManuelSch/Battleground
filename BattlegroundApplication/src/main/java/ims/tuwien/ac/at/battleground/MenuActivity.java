@@ -1,0 +1,112 @@
+package ims.tuwien.ac.at.battleground;
+
+import android.app.Dialog;
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import ims.tuwien.ac.at.battleground.game.util.Constants;
+
+/**
+ * The MenuActivity displays the menu that allows starting the game, playing the video or
+ * viewing the highscores
+ * @author hoch
+ */
+public class MenuActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_menu);
+        /*
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);*/
+
+        FloatingActionButton btn_exit_app_float = (FloatingActionButton) findViewById(R.id.btnExitApp);
+        btn_exit_app_float.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //MenuActivity.this.finish();
+                System.exit(0);
+            }
+        });
+
+        Button btn_startGame = (Button) findViewById(R.id.btnStartGame);
+        btn_startGame.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final Dialog dialog = new Dialog(MenuActivity.this);
+                dialog.setContentView(R.layout.player_setup);
+                dialog.setTitle(R.string.txt_player_setup_dialog);
+
+                Button runGameButton = (Button) dialog.findViewById(R.id.btnStartGameFromSetup);
+                runGameButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        EditText player_name = (EditText) dialog.findViewById(R.id.player_name_input);
+                        String player_nameStr = player_name.getText().toString();
+                        dialog.dismiss();
+                        Intent i = new Intent(MenuActivity.this.getApplicationContext(), GameActivity.class);
+                        i.putExtra(Constants.INTENT_VARIABLE_PLAYER_NAME, player_nameStr);
+                        startActivity(i);
+                    }
+                });
+
+                Button cancelSetupButton = (Button) dialog.findViewById(R.id.btnCancelPlayerSetup);
+                cancelSetupButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
+
+                dialog.show();
+            }
+        });
+
+        Button btn_playVideo = (Button) findViewById(R.id.btnPlayVideo);
+        btn_playVideo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getApplicationContext(), VideoActivity.class);
+                startActivity(i);
+            }
+        });
+
+        Button btn_help = (Button) findViewById(R.id.btnShowHelp);
+        btn_help.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getApplicationContext(), HelpActivity.class);
+                startActivity(i);
+            }
+        });
+
+        Button btn_highscore = (Button) findViewById(R.id.btnHighscore);
+        btn_highscore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getApplicationContext(), HighscoreActivity.class);
+                startActivity(i);
+            }
+        });
+
+        Button btn_exit_app = (Button) findViewById(R.id.btnExitAppMenu);
+        btn_exit_app.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //MenuActivity.this.finish();
+                System.exit(0);
+            }
+        });
+    }
+
+}

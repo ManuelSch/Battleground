@@ -1,0 +1,73 @@
+<resources>
+    <string name="app_name">Battleground</string>
+
+    <string name="title_activity_video">VideoActivity</string>
+    <string name="title_activity_menu">Menu</string>
+    <string name="title_activity_game">GameActivity</string>
+
+    <string name="txt_splash_screen">This is a Splash Screen</string>
+
+    <string name="btn_skip_intro">Skip Intro</string>
+
+    <string name="btn_start_game">Start Game</string>
+    <string name="btn_play_video">Play Video</string>
+    <string name="btn_highscore">Highscore</string>
+    <string name="btn_exit_app">Exit App</string>
+
+    <string name="txt_player_setup_dialog">Choose player name:</string>
+    <string name="txt_player_name_hint">Player name</string>
+    <string name="txt_start_game">Start!</string>
+    <string name="txt_cancel">Cancel</string>
+
+    <string name="txt_user">Player</string>
+    <string name="txt_score">Score</string>
+
+    <string name="txt_start_level">Start Battle</string>
+    <string name="txt_pause_game">Pause Game</string>
+    <string name="txt_resume_game">Resume Game</string>
+    <string name="action_settings">Settings</string>
+    <string name="txt_flaktower_button">Flak Tower</string>
+    <string name="txt_rockettower_button">Rocket Tower</string>
+    <string name="txt_turret_button">Turret</string>
+    <string name="txt_wall_button">Wall</string>
+
+    <string name="txt_player_round_won">Round Won</string>
+    <string name="txt_player_run_next_round">Run Next Round</string>
+    <string name="txt_player_round_lost">Round Lost</string>
+    <string name="txt_player_retry_round">Retry Round</string>
+
+    <string name="txt_delete">Delete</string>
+
+    <string name="txt_game_over">Game Over</string>
+    <string name="txt_back_to_menu">Back to Menu</string>
+
+    <string name="txt_help_dialog">
+        Battleground 2112:\n\n
+        The game takes place in the year 2112 and features a war between two fractions. The task of the player is to create a defense consisting of various buildings such as Turrets, Rocket Towers or Flak Towers which stops the evil invasion. To accomplish this the player gets an initial amount of money and creates buildings. After he has finished his defense setup the attack of the invasion begins. For each enemy the player defeats he earns money and increases his score. After the player has defeated all enemies the next round starts where he extends his defense.\n\n
+        Overall the game screen is basically separated into three parts:\n
+        \tTop: Player information\n
+        \tMiddle: Battle field\n
+        \tBottom: Game menu\n\n
+        The top part of the screen contains information about the player. In the first line the player name is displayed. In the following line there are three separate numbers: Score, lives and money\n\n
+        The middle part contains the game itself. The playing field is organized in a grid layout and each square can contain one building. To create a building the player selects a building from the menu at the bottom of the screen. With the first click on a square a preview is created there. If the player decides to create the building another click is necessary.\n
+        The following buildings are available:
+        \tWall: Keeps the enemies from moving on and protects other buildings\n
+        \tTurret: High fire rate and range, low damage\n
+        \tRocket Tower: Low fire rate and range, high damage\n
+        \tFlak Tower: Shoots flying enemies such as Helicopters\n\n
+        As soon as the player decides to finish placing buildings, he may enter the battle phase by clicking on the button in the bottom left corner of the screen. Different enemies now appear at the left border of the playing field and try to cross it. The player loses a life every time an enemy is able to reach the right border of the playing field. If all three lives are lost, the game is over. The player\'s score and money account increase every time an enemy gets destroyed by the towers.\n
+        The following types of enemies appear during the game:
+        \tRobot: Low damage, moves slowly\n
+        \tBuggy: Low damage, moves fast\n
+        \tTank: High damage and heavy armor, moves very slowly\n
+        \tHelicopter: Can only be stopped by Flak Towers and flies above buildings\n\n
+        The bottom part contains the menu of the game. Buttons are available to select the buildings that the player wants to create and also buttons to return to the menu or turn off the sound.\n\n
+    </string>
+
+    <string name="title_activity_help">Help</string>
+    <string name="btn_show_help">Show Help</string>
+    <string name="txt_lives">Lives</string>
+    <string name="txt_money">Money</string>
+    <string name="txt_level">Level</string>
+    <string name="txt_separator_player_info">:</string>
+</resources>

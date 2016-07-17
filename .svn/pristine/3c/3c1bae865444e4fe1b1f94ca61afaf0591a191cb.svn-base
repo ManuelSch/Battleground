@@ -1,0 +1,218 @@
+package ims.tuwien.ac.at.battleground.game;
+
+import android.app.Activity;
+import android.content.ContentValues;
+import android.content.Context;
+import android.util.Log;
+import android.view.SurfaceHolder;
+
+import ims.tuwien.ac.at.battleground.GameActivity;
+import ims.tuwien.ac.at.battleground.game.entity.DrawableObject;
+import ims.tuwien.ac.at.battleground.game.entity.GameObjectFactory;
+import ims.tuwien.ac.at.battleground.game.entity.Player;
+import ims.tuwien.ac.at.battleground.game.entity.PlayingField;
+import ims.tuwien.ac.at.battleground.game.entity.building.Building;
+import ims.tuwien.ac.at.battleground.game.util.GameState;
+import ims.tuwien.ac.at.battleground.game.util.BuildingType;
+import ims.tuwien.ac.at.battleground.persistence.ScoreContract;
+import ims.tuwien.ac.at.battleground.persistence.ScoreProvider;
+
+/**
+ * @author hoch
+ */
+public class Game {
+
+    private static Game INSTANCE;
+
+    /**
+     * The {@link GameLoop} that is used to calculate the game logic
+     */
+    private GameLoop loop;
+    /**
+     * The Thread that executes our {@link GameLoop}
+     */
+    private Thread loopThread;
+
+    private GameSurfaceView view;
+    private SurfaceHolder holder;
+
+    private Player player;
+    private BuildingType currentSelectedBuilding;
+    private boolean sound = true;
+
+    private GameActivity gameActivity;
+    private Context context;
+
+
+    private Game() {
+        System.out.println("Test");
+    }
+
+    private Game(Context context) {
+        this.context = context;
+    }
+
+    public static Game GET_INSTANCE(Context context) {
+        if (INSTANCE == null) {
+            INSTANCE = new Game(context);
+        }
+        return INSTANCE;
+    }
+
+    public static Game GET_INSTANCE() {
+        if (INSTANCE == null) {
+            INSTANCE = new Game();
+        }
+        return INSTANCE;
+    }
+
+    public void registerGameActivity(GameActivity gameActivity) {
+        this.gameActivity = gameActivity;
+    }
+
+    /**
+     * Ends the game and terminates the {@link GameLoop}.
+     */
+    public void endGame() {
+        loop.setRunning(false);
+        try
+        {
+            loopThread.join();
+        }
+        catch (InterruptedException e)
+        {
+            Log.e("Error", e.getMessage());
+        }
+    }
+
+    public void createBuilding(BuildingType type, int x, int y) {
+        if(player.checkEnoughMoney(GameObjectFactory.getPrice(type))) {
+            Building building = GameObjectFactory.getBuilding(type, x, y);
+            player.subtractMoney(building.getCosts());
+            PlayingField.getInstance().addObject(building);
+            this.gameActivity.toggleBuildingMenuButtons();
+            if(this.currentSelectedBuilding != null) {
+                if (player.checkEnoughMoney(GameObjectFactory.getPrice(this.currentSelectedBuilding)) == false) {
+                    this.currentSelectedBuilding = null;
+                }
+            }
+        }
+    }
+
+    public void startLevel() {
+        this.loop.setGameState(GameState.RUNNING);
+    }
+
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
+
+    public void addScore(int score) {
+        synchronized(player) {
+            player.addScore(score);
+        }
+    }
+
+    public void addMoney(int money) {
+        synchronized(player) {
+            player.addMoney(money);
+        }
+    }
+
+    public void setGameSurfaceView(GameSurfaceView view, SurfaceHolder holder) {
+        this.view = view;
+        this.holder = holder;
+        this.runGame();
+    }
+
+    public void runGame() {
+        loop = new GameLoop(holder, view);
+        this.loop.advanceLevel();
+        loopThread = new Thread(loop);
+        loopThread.start();
+    }
+
+    public void lostRound() {
+        this.loop.setGameState(GameState.PAUSE);
+        if(player.getLives() > 1) {
+            player.loseLife();
+            this.resetPlayingField();
+            this.player.resetMoney();
+            this.loop.setGameState(GameState.BUILDING_PHASE);
+            this.gameActivity.showLostLifeScreen();
+        }
+        else {
+            this.saveHighscore();
+            this.cleanup();
+            this.gameActivity.showGameOverScreen();
+        }
+    }
+
+    public void wonRound() {
+        this.loop.setGameState(GameState.PAUSE);
+        this.loop.advanceLevel();
+        this.clearPlayingFieldOfEnemies();
+        this.loop.setGameState(GameState.BUILDING_PHASE);
+
+        this.gameActivity.showRoundWonScreen();
+    }
+
+    private void saveHighscore() {
+        ContentValues values = new ContentValues();
+        values.put(ScoreContract.ScoreEntry.COLUMN_NAME_USERNAME, player.getName());
+        values.put(ScoreContract.ScoreEntry.COLUMN_NAME_SCORE, player.getScore());
+
+        context.getContentResolver().insert(ScoreProvider.CONTENT_URI, values);
+    }
+
+    private void resetPlayingField() {
+        PlayingField.getInstance().clearAllObjects();
+    }
+
+    private void clearPlayingFieldOfEnemies() {
+        PlayingField.getInstance().clearEnemies();
+        PlayingField.getInstance().clearBullets();
+    }
+
+    public BuildingType getCurrentSelectedBuilding() {
+        return currentSelectedBuilding;
+    }
+
+    public void setCurrentSelectedBuilding(BuildingType currentSelectedBuilding) {
+        this.currentSelectedBuilding = currentSelectedBuilding;
+    }
+
+    public void toggleGameRunning() {
+        this.loop.toggleGameRunning();
+    }
+
+    public boolean isGameRunning() {
+        return this.loop.isGameRunning();
+    }
+
+    public void toggleSound() {
+        this.sound = !this.sound;
+    }
+
+    public boolean isSoundOn() {
+        return this.sound;
+    }
+
+    public Player getPlayer() {
+        return this.player;
+    }
+
+    public GameState getGameState() {
+        if(this.loop == null) {
+            return GameState.BUILDING_PHASE;
+        }
+        return this.loop.getGameState();
+    }
+
+    public void cleanup() {
+        this.loop.setGameState(GameState.BUILDING_PHASE);
+        PlayingField.getInstance().clearAllObjects();
+        this.loop.resetGameLevel();
+        this.player = null;
+    }
+}

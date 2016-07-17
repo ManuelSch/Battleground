@@ -1,0 +1,34 @@
+package ims.tuwien.ac.at.battleground.game.entity.enemy;
+
+import android.content.Context;
+
+import ims.tuwien.ac.at.battleground.R;
+import ims.tuwien.ac.at.battleground.util.DimensionUtil;
+
+/**
+ * Created by Manuel on 11.11.2015.
+ */
+public class Tank extends Enemy
+{
+    public Tank(float x, float y)
+    {
+        super(x, y, R.drawable.tank_body);
+        this.enemyGun = new TankGun(getX(), getY(), this);
+
+        setHitPointsMax(700);
+        setHitPoints(getHitPointsMax());
+
+        setSpeed(60);
+        setMoneyValue(10);
+        setScoreValue(10);
+        setFlying(false);
+    }
+
+    public void update(float tpf)
+    {
+        this.moveTowards((int) (this.getSpeed() * tpf), 0);
+        this.updateAnimation(true);
+
+        super.update(tpf);
+    }
+}

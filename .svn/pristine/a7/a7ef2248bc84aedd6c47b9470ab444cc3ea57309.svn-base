@@ -1,0 +1,35 @@
+package ims.tuwien.ac.at.battleground.game.entity.enemy;
+
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Rect;
+
+import ims.tuwien.ac.at.battleground.R;
+import ims.tuwien.ac.at.battleground.game.entity.HittableObject;
+
+/**
+ * Created by Manuel on 11.11.2015.
+ */
+public class Helicopter extends Enemy
+{
+    public Helicopter(float x, float y)
+    {
+        super(x, y, R.drawable.helicopter);
+
+        setHitPointsMax(150);
+        setHitPoints(getHitPointsMax());
+
+        setSpeed(90);
+        setMoneyValue(30);
+        setScoreValue(10);
+        setFlying(true);
+    }
+
+    public void update(float tpf)
+    {
+        this.moveTowards((int) (this.getSpeed() * tpf), 0);
+        this.updateAnimation(true);
+        super.update(tpf);
+    }
+}

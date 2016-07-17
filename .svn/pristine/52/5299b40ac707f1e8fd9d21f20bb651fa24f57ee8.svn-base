@@ -1,0 +1,14 @@
+package ims.tuwien.ac.at.battleground.game.entity.enemy;
+
+/**
+ * Created by hoch on 05.11.2015.
+ */
+public interface IStrategy {
+
+    public void pathfinding();
+
+    public void attack();
+    public void evade();
+
+
+}

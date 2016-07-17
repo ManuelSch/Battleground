@@ -1,0 +1,27 @@
+package ims.tuwien.ac.at.battleground.game.entity.building;
+
+import ims.tuwien.ac.at.battleground.R;
+import ims.tuwien.ac.at.battleground.game.entity.bullet.FlakBullet;
+import ims.tuwien.ac.at.battleground.game.entity.bullet.Rocket;
+import ims.tuwien.ac.at.battleground.game.entity.enemy.Enemy;
+import ims.tuwien.ac.at.battleground.util.DimensionUtil;
+
+/**
+ * Created by Manuel on 19.12.2015.
+ */
+public class RocketTowerGun extends TowerGun {
+
+    public RocketTowerGun(float x, float y)
+    {
+        super(x, y, R.drawable.rockettower_gun);
+
+        setFiringRate(700);        //Feuerrate in ms
+        setRange(DimensionUtil.SCALE_X(0.3f));
+        setShootsFlying(false);
+    }
+
+    public void shootEnemy(Enemy enemy)
+    {
+        PF.addObject(new Rocket(this.getX(), this.getY(), enemy.getX(), enemy.getY(),true));
+    }
+}

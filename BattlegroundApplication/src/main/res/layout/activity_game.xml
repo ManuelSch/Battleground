@@ -1,0 +1,149 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable name="player" type="ims.tuwien.ac.at.battleground.game.entity.Player"/>
+        <variable name="game" type="ims.tuwien.ac.at.battleground.game.Game"/>
+    </data>
+
+    <RelativeLayout
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="ims.tuwien.ac.at.battleground.GameActivity">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical"
+            android:id="@+id/overall_game_area">
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.1"
+                android:orientation="vertical"
+                android:id="@+id/player_info_area">
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.5"
+                    android:orientation="horizontal"
+                    android:id="@+id/player_name_area">
+                    <TextView
+                        android:layout_weight=".50"
+                        android:layout_width="0dp"
+                        android:layout_height="fill_parent"
+                        android:gravity="center"
+                        android:text="@{player.name}"
+                        android:id="@+id/TextPlayerID"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.5"
+                    android:orientation="horizontal"
+                    android:id="@+id/player_score_lives_area">
+                    <TextView
+                        android:layout_weight=".33"
+                        android:layout_width="0dp"
+                        android:layout_height="fill_parent"
+                        android:gravity="center"
+                        android:text="@{@string/txt_score + @string/txt_separator_player_info + ' ' + String.valueOf(player.score)}"
+                        android:id="@+id/TextScoreID"/>
+                    <TextView
+                        android:layout_weight=".33"
+                        android:layout_width="0dp"
+                        android:layout_height="fill_parent"
+                        android:gravity="center"
+                        android:text="@{@string/txt_lives + @string/txt_separator_player_info + ' ' + String.valueOf(player.lives)}"
+                        android:id="@+id/TextLivesID"/>
+                    <TextView
+                        android:layout_weight=".33"
+                        android:layout_width="0dp"
+                        android:layout_height="fill_parent"
+                        android:gravity="center"
+                        android:text="@{String.valueOf(player.money)}"/>
+                        android:id="@+id/TextGameMenuMoney"
+                        android:id="@+id/TextGameMenuMoney"
+                        android:text="@{@string/txt_money + @string/txt_separator_player_info + ' ' + String.valueOf(player.money)}"/>
+                    <!--<TextView
+                        android:layout_weight=".25"
+                        android:layout_width="0dp"
+                        android:layout_height="fill_parent"
+                        android:gravity="center"
+                        android:id="@+id/TextGameLevel"
+                        android:text="@{@string/txt_level + @string/txt_separator_player_info + ' ' + String.valueOf(game.gameLevel)}"/> -->
+                </LinearLayout>
+            </LinearLayout>
+
+            <ims.tuwien.ac.at.battleground.game.GameSurfaceView
+                android:id="@+id/drawing_area"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.7"
+                android:layout_alignBottom="@+id/game_area"
+                />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.2"
+                android:orientation="vertical"
+                android:layout_gravity="center_vertical|center_horizontal"
+                android:id="@+id/game_menu_area">
+
+                <include layout="@layout/building_menu" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:orientation="horizontal"
+                    android:id="@+id/game_menu_area2">
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.5"
+                        android:orientation="horizontal"
+                        android:gravity="left"
+                        android:id="@+id/game_menu_controls">
+
+                        <Button
+                            android:id="@+id/btnStartStopLevel"
+                            style="@style/button"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:padding="5dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:text="@string/txt_start_level" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="horizontal"
+                        android:gravity="right"
+                        android:id="@+id/game_menu_controls2">
+
+                        <ImageButton
+                            android:id="@+id/btnSoundButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:adjustViewBounds="true"
+                            android:padding="0dp"
+                            android:scaleType="centerInside"
+                            android:src="@drawable/soundon"
+                            android:background="?android:attr/selectableItemBackground"/>
+                        <ImageButton
+                            android:id="@+id/btnBackToMenu"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:adjustViewBounds="true"
+                            android:padding="0dp"
+                            android:scaleType="centerInside"
+                            android:src="@drawable/backtomenu"
+                            android:background="?android:attr/selectableItemBackground"/>
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
+</layout>

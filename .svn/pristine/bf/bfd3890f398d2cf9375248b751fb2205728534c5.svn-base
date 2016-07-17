@@ -1,0 +1,145 @@
+package ims.tuwien.ac.at.battleground.game.entity.enemy;
+
+import android.content.Context;
+import android.graphics.BitmapFactory;
+import android.graphics.Rect;
+
+import java.util.Arrays;
+import java.util.List;
+
+import ims.tuwien.ac.at.battleground.R;
+import ims.tuwien.ac.at.battleground.game.Game;
+import ims.tuwien.ac.at.battleground.game.GameSurfaceView;
+import ims.tuwien.ac.at.battleground.game.entity.DrawableObject;
+import ims.tuwien.ac.at.battleground.game.entity.HittableObject;
+
+/**
+ * Created by hoch on 05.11.2015.
+ */
+public abstract class Enemy extends HittableObject implements Comparable<Enemy>
+{
+    private double speed;
+    private int moneyValue;
+    private int scoreValue;
+    private boolean flying;
+    private IStrategy strategy;
+    protected EnemyGun enemyGun = null;
+    protected boolean blocked = false;
+
+    public Enemy(float x, float y, int bitmapId)
+    {
+        super(x, y, bitmapId);
+        this.setAngle(0);
+    }
+
+    @Override
+    public void update(float tpf)
+    {
+        super.update(tpf);
+        if(this.enemyGun != null)
+        {
+            this.enemyGun.setX(this.getX());
+            this.enemyGun.setY(this.getY());
+            this.enemyGun.update(tpf);
+        }
+    }
+
+    @Override
+    public void die() {
+        super.die();
+        if(this.enemyGun != null)
+        {
+            this.enemyGun.die();
+        }
+        GAME.addScore(this.scoreValue);
+        GAME.addMoney(this.moneyValue);
+    }
+
+    //Wird verwendet, um die PF-ArrayList "allEnemies" nach den X-Koordinaten aller Gegner zu
+    //sortieren. (Gegner weiter rechts am Spielfeld kommen zuerst)
+    @Override
+    public int compareTo(Enemy other)
+    {
+        return -1*(int)(other.getX() - this.getX());
+    }
+
+    //Get- und Set-Methoden:
+    public double getSpeed()
+    {
+        return speed;
+    }
+    public void setSpeed(double speed)
+    {
+        this.speed = speed;
+    }
+
+    public double getMoneyValue()
+    {
+        return moneyValue;
+    }
+    public void setMoneyValue(int moneyValue)
+    {
+        this.moneyValue = moneyValue;
+    }
+
+    public double getScoreValue()
+    {
+        return scoreValue;
+    }
+    public void setScoreValue(int scoreValue)
+    {
+        this.scoreValue = scoreValue;
+    }
+
+    public boolean isFlying()
+    {
+        return flying;
+    }
+    public void setFlying(boolean flying)
+    {
+        this.flying = flying;
+    }
+
+    public IStrategy getStrategy()
+    {
+        return strategy;
+    }
+    public void setStrategy(Strategy strategy)
+    {
+        this.strategy = strategy;
+    }
+
+    /*
+    public void move(float tpf, int screenWidth) {
+        float enemyDistanceInTotal = 0;
+        int enemyDistance = Math.round(enemyDistanceInTotal * tpf);
+
+        int newLeft = 0;
+        int newRight = 0;
+
+        if(this.direction == 0) {
+            newLeft = destRect.left + enemyDistance;
+            newRight = destRect.right + enemyDistance;
+        }
+
+        if(this.direction == 1) {
+            newLeft = destRect.left - enemyDistance;
+            newRight = destRect.right - enemyDistance;
+        }
+
+        if(screenWidth < newRight) {
+            direction = 1;
+        }
+        if(newLeft < 0) {
+            direction = 0;
+        }
+
+        this.destRect = new Rect(newLeft, this.getDestRect().top, newRight, this.getDestRect().top + this.bitmap.getHeight());
+    }*/
+
+
+    @Override
+    public List<DrawableObject> getSubParts() {
+        return Arrays.asList((DrawableObject) this.enemyGun);
+    }
+}

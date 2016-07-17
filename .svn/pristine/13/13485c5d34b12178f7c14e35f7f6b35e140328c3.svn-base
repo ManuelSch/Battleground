@@ -1,0 +1,23 @@
+package ims.tuwien.ac.at.battleground.util;
+
+import android.view.View;
+
+import ims.tuwien.ac.at.battleground.game.Game;
+import ims.tuwien.ac.at.battleground.game.util.BuildingType;
+
+/**
+ * @author hoch
+ */
+public class CustomClickListener implements View.OnClickListener {
+    private BuildingType towerType;
+
+    public CustomClickListener(BuildingType towerType) {
+        this.towerType = towerType;
+    }
+
+    @Override
+    public void onClick(View v) {
+        Game.GET_INSTANCE().setCurrentSelectedBuilding(this.towerType);
+    }
+
+}

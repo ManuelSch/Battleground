@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Battleground.iml" filepath="$PROJECT_DIR$/Battleground.iml" />
+      <module fileurl="file://$PROJECT_DIR$/BattlegroundApplication/BattlegroundApplication.iml" filepath="$PROJECT_DIR$/BattlegroundApplication/BattlegroundApplication.iml" />
+    </modules>
+  </component>
+</project>

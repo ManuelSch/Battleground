@@ -1,0 +1,33 @@
+package ims.tuwien.ac.at.battleground.game.entity.enemy;
+
+import android.content.Context;
+
+import ims.tuwien.ac.at.battleground.R;
+
+/**
+ * Created by Manuel on 11.11.2015.
+ */
+public class Robot extends Enemy
+{
+    public Robot(float x, float y)
+    {
+        super(x, y, R.drawable.robot_body);
+        this.enemyGun = new RobotGun(getX(), getY(), this);
+
+        setHitPointsMax(200);
+        setHitPoints(getHitPointsMax());
+
+        setSpeed(80);
+        setMoneyValue(10);
+        setScoreValue(10);
+        setFlying(false);
+    }
+
+    public void update(float tpf)
+    {
+        this.moveTowards((int) (this.getSpeed() * tpf), 0);
+        this.updateAnimation(true);
+
+        super.update(tpf);
+    }
+}

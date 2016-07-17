@@ -1,0 +1,72 @@
+<resources>
+    <string name="app_name">Battleground</string>
+
+    <string name="title_activity_video">VideoActivity</string>
+    <string name="title_activity_menu">Hauptmenü</string>
+    <string name="title_activity_game">GameActivity</string>
+
+    <string name="txt_splash_screen">This is a Splash Screen</string>
+
+    <string name="btn_skip_intro">Intro überspringen</string>
+
+    <string name="btn_start_game">Starte Spiel</string>
+    <string name="btn_play_video">Video abspielen</string>
+    <string name="btn_highscore">Highscore</string>
+    <string name="btn_exit_app">Battleground schließen</string>
+
+    <string name="txt_player_setup_dialog">Spielername wählen:</string>
+    <string name="txt_player_name_hint">Spielername</string>
+    <string name="txt_start_game">Start!</string>
+    <string name="txt_cancel">Abbrechen</string>
+
+    <string name="txt_user">Player</string>
+    <string name="txt_score">Punkte</string>
+
+    <string name="txt_start_level">Starte Kampf</string>
+    <string name="txt_pause_game">Pause</string>
+    <string name="txt_resume_game">Fortfahren</string>
+    <string name="action_settings">Einstellungen</string>
+    <string name="txt_flaktower_button">Flakturm</string>
+    <string name="txt_rockettower_button">Raketenturm</string>
+    <string name="txt_turret_button">Geschützturm</string>
+    <string name="txt_wall_button">Mauer</string>
+
+    <string name="txt_player_round_won">Runde gewonnen</string>
+    <string name="txt_player_run_next_round">Nächste Runde starten</string>
+    <string name="txt_player_round_lost">Runde verloren</string>
+    <string name="txt_player_retry_round">Nochmal versuchen</string>
+
+    <string name="txt_delete">Löschen</string>
+
+    <string name="txt_game_over">Game Over</string>
+    <string name="txt_back_to_menu">Zurück zum Menü</string>
+    <string name="btn_show_help">Spielhilfe anzeigen</string>
+    <string name="title_activity_help">Spielhilfe</string>
+    <string name="txt_help_dialog">
+        Battleground 2112:\n\n
+        Im Spiel findet eine futuristische Schlacht im Jahr 2112 statt, in der der Spieler versucht, durch das Erbauen seiner Abwehrbasis angreifende Gegner zu stoppen. Dafür stehen ihm verschiedene Gebäude zur Verfügung, die er auf dem Spielfeld verteilen kann.\n\n
+        Der Spielbildschirm ist in 3 wesentliche Bereiche aufgeteilt:\n
+        \tOben: Spielerinformation\n
+        \tMitte: Schlachtfeld\n
+        \tUnten: Spielmenü\n\n
+        Der obere Teil enthält Informationen über den Spieler. In der ersten Zeile wird der Name des Spielers angezeigt, darunter befinden sich der aktuelle Score, die restlichen Leben und der Kontostand.\n\n
+        Im mittleren Teil wird das rasterartige Schlachtfeld dargestellt. Auf jedem Feld kann maximal ein Gebäude gebaut werden. Dazu  wählt der Spieler zuerst das gewünschte Gebäude aus dem Menü am unteren Bildschirmrand aus und platziert es anschließend auf dem Spielfeld. Hierdurch wird eine Vorschau des Gebäudes angezeigt. Mit einem weiteren Klick wird der Bauvorgang bestätigt.\n
+        Folgende Gebäude stehen dem Spieler zur Verfügung:
+        \tMauer: Hält die Gegner auf und schützt andere Gebäude vor feindlichem Beschuss\n
+        \tGeschützturm: Hohe Feuerrate und Reichweite, geringer Schaden\n
+        \tRaketenturm: Niedrige Feuerrate und Reichweite, hoher Schaden\n
+        \tFlak Tower: Kann fliegende Feinde (z.B. Helicopter) abschießen\n\n
+        Nachdem der Spieler alle gewünschten Gebäude platziert hat, kann er den Kampf mit der entsprechenden Schaltfläche in der linken unteren Ecke des Bildschirms starten.\n
+        Nun erscheinen verschiedene Gegner am linken Spielfeldrand und versuchen selbiges zu überqueren. Schafft dies ein Gegner, wird dem Spieler ein Leben abgezogen. Sobald alle drei Leben verloren sind, ist das Spiel vorbei. Der Score und das Geldkonto des Spielers erhöhen sich durch den erfolgreichen Abschuss von Gegnern.\n
+        Mit folgenden Gegnertypen muss es der Spieler aufnehmen:\n
+        \tRoboter: Niedriger Schaden, bewegt sich langsam\n
+        \tBuggy: Niedriger Schaden, bewegt sich schnell\n
+        \tPanzer: Hoher Schaden, hält viele Treffer aus und bewegt sich sehr langsam\n
+        \tHelikopter: Kann nur von Flaktürmen beschossen werden und überfliegt Gebäude\n\n
+        Im unteren Bereich des Bildschirms befindet sich das Spielmenü. Dazu gehört das Baumenü mit allen verfügbaren Gebäuden sowie Schaltflächen zum Starten der Kampfphase, Ein- und Ausschalten der Spielgeräusche und zum Zurückkehren zum Hauptmenü.\n\n
+    </string>
+    <string name="txt_level">Level</string>
+    <string name="txt_lives">Leben</string>
+    <string name="txt_money">Geld</string>
+    <string name="txt_separator_player_info">:</string>
+</resources>

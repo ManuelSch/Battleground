@@ -1,0 +1,26 @@
+package ims.tuwien.ac.at.battleground.game.entity.building;
+
+import android.content.Context;
+
+import ims.tuwien.ac.at.battleground.R;
+import ims.tuwien.ac.at.battleground.game.util.BuildingType;
+import ims.tuwien.ac.at.battleground.game.util.Constants;
+
+/**
+ * Created by hoch on 05.11.2015.
+ */
+public class RocketTower extends Tower
+{
+
+    public RocketTower(float x, float y)
+    {
+        super(x, y, R.drawable.rockettower_body);
+        this.towerGun = new RocketTowerGun(getX(),getY());
+        this.setBuildingType(BuildingType.ROCKET_TOWER);
+
+        setHitPointsMax(1000);
+        setHitPoints(getHitPointsMax());
+
+        setCosts(Constants.ROCKET_TOWER_PRICE);
+    }
+}

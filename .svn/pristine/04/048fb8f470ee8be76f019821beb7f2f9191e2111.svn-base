@@ -1,0 +1,40 @@
+package ims.tuwien.ac.at.battleground.game.entity.enemy;
+
+import ims.tuwien.ac.at.battleground.R;
+import ims.tuwien.ac.at.battleground.game.entity.building.Building;
+import ims.tuwien.ac.at.battleground.game.entity.bullet.Laser;
+import ims.tuwien.ac.at.battleground.game.entity.bullet.Rocket;
+import ims.tuwien.ac.at.battleground.util.DimensionUtil;
+
+/**
+ * Created by Manuel on 18.12.2015.
+ */
+public class BuggyGun extends EnemyGun {
+
+    private Buggy parent;
+
+    public BuggyGun(float x, float y, Buggy body)
+    {
+        super(x, y, R.drawable.buggy_gun, body);
+
+        setFiringRate(200);        //Feuerrate in ms
+        setRange(DimensionUtil.SCALE_X(0.3f));
+    }
+
+    public boolean scanForBuildingsAndShoot(Building building)
+    {
+        float dx = this.getX() - building.getX();
+        float dy = this.getY() - building.getY();
+
+        if((this.getRange()*this.getRange()) >= (dx*dx + dy*dy)) {
+            //System.out.println("Enemy in Range");
+
+            PF.addObject(new Laser(this.getX(), this.getY(), building.getX(), building.getY(),false));
+            this.setAngle(this.calcAngle(this.getX(), this.getY(), building.getX(), building.getY()));
+
+            return true;
+        }
+
+        return false;
+    }
+}

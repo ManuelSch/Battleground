@@ -1,0 +1,41 @@
+package ims.tuwien.ac.at.battleground;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.Button;
+import android.widget.ImageView;
+
+/**
+ * This class represents a SplashScreen for when the player
+ * has lost a life.
+ *
+ * @author hoch
+ */
+public class LostLifeActivity extends Activity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        setContentView(R.layout.lost_life_splash_screen);
+
+        Animation mViewAnimation = AnimationUtils.loadAnimation(this, R.anim.lose_life_anim);
+        ImageView roundLostImage = (ImageView) findViewById(R.id.view_anim_imageview);
+
+        mViewAnimation.reset();
+        roundLostImage.clearAnimation();
+        roundLostImage.startAnimation(mViewAnimation);
+
+
+        final Button btn_Resume = (Button) findViewById(R.id.btn_resume_next_round);
+        btn_Resume.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                LostLifeActivity.this.finish();
+            }
+        });
+    }
+}

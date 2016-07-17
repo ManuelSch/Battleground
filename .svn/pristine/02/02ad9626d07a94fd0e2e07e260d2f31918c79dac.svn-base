@@ -1,0 +1,106 @@
+package ims.tuwien.ac.at.battleground.game.entity.enemy;
+
+import java.sql.SQLOutput;
+import java.util.ArrayList;
+
+import ims.tuwien.ac.at.battleground.game.entity.DrawableObject;
+import ims.tuwien.ac.at.battleground.game.entity.building.Building;
+
+/**
+ * Created by Manuel on 18.12.2015.
+ */
+public abstract class EnemyGun extends DrawableObject {
+
+    /**
+     * specifies the time in between two shots (stored in ms).
+     */
+    private double firingRate;
+    /**
+     * specifies the damage that this Tower deals with a single shot
+     */
+    private double damage;
+    /**
+     * specifies the range of the tower (in units)
+     */
+    private double range;
+    /**
+     * an internal counter that checks if the firingRate has been reached
+     */
+    protected double LastShotTime;
+
+    private Enemy body;
+
+    public EnemyGun(float x, float y, int bitmapId, Enemy body)
+    {
+        super(x, y, bitmapId);
+        this.setAngle(0);
+        this.body = body;
+
+        this.LastShotTime = 0;
+    }
+
+    public void update(float tpf)
+    {
+        //Position mit dem Parent abgleichen:
+        this.setX(body.getX());
+        this.setY(body.getY());
+
+        // check if we can shoot
+        double currentTime = System.currentTimeMillis();
+        if(LastShotTime + getFiringRate() < currentTime)
+        {
+            ArrayList<Building> allBuildings = PF.getAllBuildings();
+            if (allBuildings.size() != 0) {
+                for (Building building : allBuildings) {
+                    // check if enemy is in shooting range
+                    if(scanForBuildingsAndShoot(building) == true) {
+
+                        LastShotTime = currentTime;
+                        this.aAnimate = true;
+                        break;
+                    }
+                }
+            }
+        }
+
+        // reload animation
+        if(aAnimate == true) {
+            this.updateAnimation(false);
+        }
+        else {
+            aCurrentFrame = 0;
+        }
+    }
+
+    public abstract boolean scanForBuildingsAndShoot(Building building);
+
+    public double getFiringRate()
+    {
+        return firingRate;
+    }
+
+    public void setFiringRate(double firingRate)
+    {
+        this.firingRate = firingRate;
+    }
+
+    public double getDamage()
+    {
+        return damage;
+    }
+
+    public void setDamage(double damage)
+    {
+        this.damage = damage;
+    }
+
+    public double getRange()
+    {
+        return range;
+    }
+
+    public void setRange(double range)
+    {
+        this.range = range;
+    }
+}

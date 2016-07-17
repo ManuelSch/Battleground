@@ -1,0 +1,174 @@
+package ims.tuwien.ac.at.battleground.game.entity.building;
+
+import android.graphics.Canvas;
+
+import java.util.ArrayList;
+
+import ims.tuwien.ac.at.battleground.game.entity.DrawableObject;
+import ims.tuwien.ac.at.battleground.game.entity.enemy.Enemy;
+
+/**
+ * Created by Manuel on 18.12.2015.
+ */
+public abstract class TowerGun extends DrawableObject {
+
+    /**
+     * specifies the time in between two shots (stored in ms).
+     */
+    private double firingRate;
+    /**
+     * specifies the damage that this Tower deals with a single shot
+     */
+    private double damage;
+    /**
+     * specifies the range of the tower (in units)
+     */
+    private double range;
+    /**
+     * specifies if this tower can shoot at flying objects (true if it can, false otherwise)
+     */
+    private boolean shootsFlying;
+    /**
+     * an internal counter that checks if the firingRate has been reached
+     */
+    protected double LastShotTime;
+
+    /**
+     * Constructor of the Tower
+     *
+     * @param x the x-coordinate of the object
+     * @param y the y-coordinate of the object
+     * @param bitmapId the id of the bitmap to be loaded
+     */
+    public TowerGun(float x, float y, int bitmapId)
+    {
+        super(x, y, bitmapId);
+
+        this.LastShotTime = 0;
+    }
+
+    /**
+     * Updates the current object. This method increases the internal
+     * reloadCounter and checks if an enemy is in range and can be shot at.
+     * @param tpf The timePerFrame that has passed
+     */
+    //public float enemyX, enemyY;
+    public void update(float tpf) {
+        // check if we can shoot
+        ArrayList<Enemy> allEnemies = PF.getAllEnemies();
+        /*enemyX = this.getX();
+        enemyY = this.getY();*/
+        if (allEnemies.size() != 0) {
+            for (Enemy enemy : allEnemies) {
+                if (enemy.isFlying() == this.isShootsFlying()) {
+                    if (isEnemyInRange(enemy) == true) {
+                        this.setAngle(this.calcAngle(this.getX(), this.getY(), enemy.getX(), enemy.getY()));
+                        //enemyX = enemy.getX();
+                        //enemyY = enemy.getY();
+
+                        double currentTime = System.currentTimeMillis();
+                        if (LastShotTime + getFiringRate() < currentTime) {
+                            shootEnemy(enemy);
+                            LastShotTime = currentTime;
+                            this.aAnimate = true;
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+
+        // reload animation
+        if(aAnimate == true) {
+            this.updateAnimation(false);
+        }
+        else {
+            aCurrentFrame = 0;
+        }
+    }
+
+    public boolean isEnemyInRange(Enemy enemy)
+    {
+        float dx = this.getX() - enemy.getX();
+        float dy = this.getY() - enemy.getY();
+
+        return (this.getRange()*this.getRange()) >= (dx*dx + dy*dy);
+    }
+
+    /**
+     * Checks whether an {@Link Enemy} is in range or not. If the {@Link Enemy} is
+     * in range the tower fires a bullet.
+     *
+     * @param enemy The enemy to be checked
+     * @return True if the enemy is in range and can be shot at, false if otherwise
+     */
+    public abstract void shootEnemy(Enemy enemy);
+
+    /**
+     * Gets the time in between two shots (stored in ms).
+     * @return The time in between two shots (stored in ms).
+     */
+    public double getFiringRate()
+    {
+        return firingRate;
+    }
+
+    /**
+     * Sets the time in between two shots (stored in ms).
+     * @param firingRate The time in between two shots (stored in ms).
+     */
+    public void setFiringRate(double firingRate)
+    {
+        this.firingRate = firingRate;
+    }
+
+    /**
+     * Gets the damage that this Tower deals with a single shot
+     * @return The damage that this Tower deals with a single shot
+     */
+    public double getDamage()
+    {
+        return damage;
+    }
+
+    /**
+     * Sets the damage that this Tower deals with a single shot
+     * @param damage The damage that this Tower deals with a single shot
+     */
+    public void setDamage(double damage)
+    {
+        this.damage = damage;
+    }
+
+    /**
+     * Gets the range of the tower (in unit)
+     * @return The range of the tower (in unit)
+     */
+    public double getRange()
+    {
+        return range;
+    }
+
+    /**
+     * Sets the range of the tower (in pixel)
+     * @param range The range of the tower (in pixel)
+     */
+    public void setRange(double range)
+    {
+        this.range = range;
+    }
+
+    /**
+     * Returns whether the Tower can shoot flying enemies or not
+     * @return True if the tower can shoot flying enemies, false otherwise
+     */
+    public boolean isShootsFlying()
+    {
+        return shootsFlying;
+    }
+
+    public void setShootsFlying(boolean shootsFlying)
+    {
+        this.shootsFlying = shootsFlying;
+    }
+}

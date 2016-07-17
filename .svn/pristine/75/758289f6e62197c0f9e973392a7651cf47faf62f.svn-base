@@ -1,0 +1,69 @@
+package ims.tuwien.ac.at.battleground.game.entity.enemy;
+
+import android.content.Context;
+import android.graphics.Rect;
+
+import java.util.ArrayList;
+
+import ims.tuwien.ac.at.battleground.R;
+import ims.tuwien.ac.at.battleground.game.entity.building.Building;
+import ims.tuwien.ac.at.battleground.util.DimensionUtil;
+
+/**
+ * Created by Manuel on 11.11.2015.
+ */
+public class Tank extends Enemy
+{
+    public Tank(float x, float y)
+    {
+        super(x, y, R.drawable.tank_body);
+        this.enemyGun = new TankGun(getX(), getY(), this);
+
+        setHitPointsMax(700);
+        setHitPoints(getHitPointsMax());
+
+        setSpeed(60);
+        setMoneyValue(70);
+        setScoreValue(10);
+        setFlying(false);
+    }
+
+    public void update(float tpf)
+    {
+        //Ist der Weg blockiert?
+        ArrayList<Building> allBuildings = PF.getAllBuildings();
+        blocked = false;
+        if (allBuildings.size() != 0) {
+            for (Building building : allBuildings) {
+                if(Rect.intersects(this.destRect, building.getDestRect())) {
+                    blocked = true;
+                    break;
+                }
+                else {
+                    blocked = false;
+                }
+            }
+        }
+
+        if(this.blocked == true)
+        {
+            aAnimate =false;
+        }
+        else
+        {
+            this.moveTowards((int) (this.getSpeed() * tpf), 0);
+            aAnimate = true;
+        }
+
+
+        //movement animation
+        if(aAnimate == true) {
+            this.updateAnimation(false);
+        }
+        else {
+            aCurrentFrame = 0;
+        }
+
+        super.update(tpf);
+    }
+}

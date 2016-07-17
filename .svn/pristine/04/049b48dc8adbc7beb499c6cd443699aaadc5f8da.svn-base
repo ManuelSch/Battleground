@@ -1,0 +1,60 @@
+package ims.tuwien.ac.at.battleground.game.entity.building;
+
+import android.content.Context;
+
+import ims.tuwien.ac.at.battleground.game.entity.HittableObject;
+import ims.tuwien.ac.at.battleground.game.util.BuildingType;
+
+/**
+ * Class that handles Buildings in the application.
+ * It is used as an abstract super class for all Buildings
+ * in the overall game. Each Building costs a certain amount.
+ */
+public abstract class Building extends HittableObject
+{
+
+    private BuildingType buildingType;
+    /**
+     * costs for creating the building
+     */
+    private int costs;
+
+    /**
+     * Constructor of the Building
+     *
+     * @param x the x-coordinate of the object
+     * @param y the y-coordinate of the object
+     * @param bitmapId the id of the bitmap to be loaded
+     */
+    public Building(float x, float y, int bitmapId)
+    {
+        super(x, y, bitmapId);
+    }
+
+    /**
+     * Sets the costs of the Building
+     * @param costs The costs of the Building
+     */
+    public void setCosts(int costs)
+    {
+        this.costs = costs;
+    }
+
+    /**
+     * Returns the costs of the Building
+     * @return The costs of the Building
+     */
+    public double getCosts()
+    {
+        return costs;
+    }
+
+    public BuildingType getBuildingType() {
+        return buildingType;
+    }
+
+    public void setBuildingType(BuildingType buildingType) {
+        this.buildingType = buildingType;
+    }
+
+}

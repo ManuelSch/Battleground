@@ -1,0 +1,73 @@
+package ims.tuwien.ac.at.battleground.util;
+
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Rect;
+
+/**
+ * Handles a single Bitmap that represents a SpriteSheet
+ */
+public class SpriteSheet {
+
+    /**
+     * Specifies the frame width that is used in the sprite
+     */
+    private int frameWidth;
+    /**
+     * Specifies the frame height that is used in the sprite
+     */
+    private int frameHeight;
+    /**
+     * Specifies the number of frames in the spritesheet
+     */
+    private int frameCount;
+
+    /**
+     * The {@link Bitmap} of the object
+     */
+    private Bitmap bitmap;
+
+    private int bitmapID;
+
+
+    public SpriteSheet(Context context, int bitmapID, int frameCount) {
+        this.bitmapID = bitmapID;
+        this.frameCount = frameCount;
+
+        this.loadBitmap(context);
+    }
+
+    /**
+     * Loads an bitmap according to its ID.
+     * TODO: could implement Caching for bitmaps as well
+     *
+     * @param context The context for the resources to load
+     */
+    public void loadBitmap(Context context) {
+        this.bitmap = BitmapFactory.decodeResource(context.getResources(), this.bitmapID);
+        this.frameHeight = this.bitmap.getHeight();
+        this.frameWidth = this.bitmap.getWidth()/frameCount;
+    }
+
+    public int getBitmapID() {
+        return bitmapID;
+    }
+
+    public int getFrameHeight() {
+        return frameHeight;
+    }
+
+    public int getFrameWidth() {
+        return frameWidth;
+    }
+
+    public int getFrameCount() {
+        return frameCount;
+    }
+
+    public Bitmap getBitmap() {
+        return bitmap;
+    }
+
+}

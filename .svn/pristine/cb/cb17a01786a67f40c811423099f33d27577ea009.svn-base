@@ -1,0 +1,43 @@
+package ims.tuwien.ac.at.battleground.game.entity.building;
+
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Rect;
+
+import java.util.ArrayList;
+
+import ims.tuwien.ac.at.battleground.R;
+import ims.tuwien.ac.at.battleground.game.entity.DrawableObject;
+import ims.tuwien.ac.at.battleground.game.entity.bullet.Bullet;
+import ims.tuwien.ac.at.battleground.game.entity.bullet.FlakBullet;
+import ims.tuwien.ac.at.battleground.game.entity.enemy.Enemy;
+import ims.tuwien.ac.at.battleground.game.util.BuildingType;
+import ims.tuwien.ac.at.battleground.game.util.Constants;
+import ims.tuwien.ac.at.battleground.util.DimensionUtil;
+
+/**
+ * Represents a FlakTower which can shoot flying objects. It
+ * extends the {@link ims.tuwien.ac.at.battleground.game.entity.building.Tower} class.
+ */
+public class FlakTower extends Tower
+{
+
+    /**
+     * The constructor of the FlakTower
+     *
+     * @param x the x-coordinate of the object
+     * @param y the y-coordinate of the object
+     */
+    public FlakTower(float x, float y)
+    {
+        super(x, y, R.drawable.flaktower_body);
+        this.towerGun = new FlakTowerGun(getX(),getY());
+        this.setBuildingType(BuildingType.FLAK_TOWER);
+
+        setHitPointsMax(1000);
+        setHitPoints(getHitPointsMax());
+
+        setCosts(Constants.FLAK_TOWER_PRICE);
+    }
+}

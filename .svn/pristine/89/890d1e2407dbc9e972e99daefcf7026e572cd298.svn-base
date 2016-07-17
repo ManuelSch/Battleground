@@ -1,0 +1,67 @@
+package ims.tuwien.ac.at.battleground.game.util;
+
+import ims.tuwien.ac.at.battleground.game.Game;
+import ims.tuwien.ac.at.battleground.game.entity.PlayingField;
+import ims.tuwien.ac.at.battleground.util.SoundManager;
+import ims.tuwien.ac.at.battleground.util.SpriteSheetManager;
+
+/**
+ * Specifies some Constants that are used in the application
+ */
+public interface Constants {
+
+    /**
+     * The length of the playing field
+     */
+    public final static int SIDE_LENGTH = 15;
+    /**
+     * Reference to singleton instance of {@link ims.tuwien.ac.at.battleground.game.entity.PlayingField}
+     */
+    public final static PlayingField PF = PlayingField.getInstance();
+
+
+    public final static SpriteSheetManager SPRITE_SHEET_MANAGER = SpriteSheetManager.GET_INSTANCE();
+
+    public final static Game GAME = Game.GET_INSTANCE();
+
+    public final static SoundManager SOUND_MANAGER = SoundManager.GET_INSTANCE();
+
+    public final static int GAME_LEVEL1_FREQUENCY = 100;
+    public final static int GAME_LEVEL1_ENEMY_FRAME_COUNT = 500;
+
+    public final static int GAME_LEVEL2_FREQUENCY = 50;
+    public final static int GAME_LEVEL2_ENEMY_FRAME_COUNT = 500;
+
+    public final static int GAME_LEVEL3_FREQUENCY = 50;
+    public final static int GAME_LEVEL3_ENEMY_FRAME_COUNT = 600;
+
+    public final static int GAME_LEVEL4_FREQUENCY = 50;
+    public final static int GAME_LEVEL4_ENEMY_FRAME_COUNT = 700;
+
+    public final static int GAME_LEVEL5_FREQUENCY = 50;
+    public final static int GAME_LEVEL5_ENEMY_FRAME_COUNT = 800;
+
+    public final static int GAME_LEVEL6_FREQUENCY = 50;
+    public final static int GAME_LEVEL6_ENEMY_FRAME_COUNT = 1000;
+
+    public final static int GAME_LEVEL7_FREQUENCY = 25;
+    public final static int GAME_LEVEL7_ENEMY_FRAME_COUNT = 500;
+
+    public final static int GAME_LEVEL8_FREQUENCY = 25;
+    public final static int GAME_LEVEL8_ENEMY_FRAME_COUNT = 600;
+
+    public final static int GAME_LEVEL9_FREQUENCY = 25;
+    public final static int GAME_LEVEL9_ENEMY_FRAME_COUNT = 750;
+
+    public final static int GAME_LEVEL10_FREQUENCY = 15;
+    public final static int GAME_LEVEL10_ENEMY_FRAME_COUNT = 500;
+
+    public final static int FLAK_TOWER_PRICE = 120;
+    public final static int ROCKET_TOWER_PRICE = 120;
+    public final static int TURRET_PRICE = 120;
+
+    public final static int PLAYER_INITIAL_MONEY = 1000;
+
+    public final static String INTENT_VARIABLE_PLAYER_NAME = "player_name";
+    public final static String DEFAULT_PLAYER_NAME = "TestPlayer";
+}
